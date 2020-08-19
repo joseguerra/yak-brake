@@ -1,0 +1,15 @@
+<br />
+<div class="container" *ngIf="cartProducts.length > 0">
+  <div class="position">
+    <!-- List of Products -->
+    <div class="b">
+      <app-cart-calculator [products]="cartProducts"></app-cart-calculator>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="cartProducts.length === 0">
+  <app-no-products-found
+    [title]="messageTitle"
+    [description]="messageDescription"
+  ></app-no-products-found>
+</div>

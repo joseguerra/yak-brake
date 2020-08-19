@@ -1,0 +1,96 @@
+<div class="container-cart suelo" *ngIf="cartQuantity !== 0">
+
+    <tbody class="a">
+        <tr
+          class="list-group-item d-flex justify-content-between lh-condensed height"
+          *ngFor="let product of products; let idx = index"
+        >
+          <td>
+              <a [routerLink]="['/products/product', product.$key]">
+                <img
+                  [src]="product.images[0]"
+                  class="img-fluid"
+                  alt=""
+                  width="260px"
+                  height="640px"
+                />
+                <a>
+            
+                  <div
+                    class="mask waves-effect waves-light"
+                    mdbRippleRadius
+                  ></div>
+                </a>
+              </a>
+          </td>
+          <td class="padding-left">
+              <div>
+                <a [routerLink]="['/products/product', product.$key]" class="name">{{ product.productName}}</a>
+              </div>
+              <br/>
+              <div class="content">
+                  <label>
+                      Cantidad: 
+                  </label>
+                  <div dropdown>
+                  
+                      <a
+                      dropdownToggle
+                      type="button"
+                      class="nav-link dropdown-toggle waves-light"
+                    >
+                    {{ product.cartQuantity }}<span class="caret"></span
+                    ></a>
+                    <div
+                      *dropdownMenu
+                      class="dropdown-menu dropdown dropdown-primary"
+                      role="menu"
+                    >
+                      <a
+                        class="dropdown-item waves-light"
+                        href="javascript:;;"
+                        (click)="setLang(val,idx)"
+                        *ngFor="let val of valueList"
+                      >
+                        {{ val }}</a
+                      >
+                    </div>
+                  </div>
+                  <span class="rigth"><strong>$ {{ product.productPrice * productService.getValueCurrency() | number }}</strong></span>
+              </div>
+      
+      
+      
+                
+            
+          </td>
+          <td class="delete">
+            <i class="fa fa-times" (click)="removeCartProduct(product)">
+            </i>
+          </td>
+        </tr>
+        <tr class="list-group-item d-flex justify-content-between float">
+          <td>
+              <span class="sizeTotal">Total ({{ cartQuantity }} productos): <strong>${{ totalValue * productService.getValueCurrency() | number }}</strong></span>
+          </td>
+          
+        </tr>
+    </tbody>
+    <div class="b">
+        <br/>
+        <span class="sizeTotal">Total ({{ cartQuantity }} productos): <strong>${{ totalValue * productService.getValueCurrency() | number }}</strong> </span>
+        <a [routerLink]="['/checkouts']" type="submit" class="btn btn-primary btn-lg btn-block padding-top">
+            Proceder al Pago <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+</div>
+
+<div class="container" *ngIf="cartQuantity === 0">
+  <app-no-products-found
+    [title]="messageTitle"
+    [description]="messageDescription"
+  ></app-no-products-found>
+</div>
+  
+  
+  

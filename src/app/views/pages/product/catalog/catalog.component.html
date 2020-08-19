@@ -1,0 +1,59 @@
+<br />
+
+
+<app-card-loader
+[loop]="4"
+[height]="800"
+*ngIf="loading"
+></app-card-loader>
+
+<div class="container" *ngIf="!loading">
+
+    <div class="row" *ngIf="authService.isAdmin$ | async">
+        <div class="col-sm">
+          <div class="float-right">
+            <button
+              type="button"
+              class="btn btn-primary waves-light"
+              data-toggle="modal"
+              data-target="#exampleModalLong"
+            >
+              Agregar Producto
+            </button>
+          </div>
+        </div>
+      </div>
+  <div
+  class="item row"
+  style="padding: 20px;"
+  *ngFor="let product of productList; let i = index"
+>
+    <div class="mb-r">
+      <!--Card-->
+
+        <!--Card image-->
+        <a [routerLink]="['/products/product', product.productUrl]">
+            <img
+              [src]="product.productImageUrl"
+              class="img-fluid"
+              alt=""
+              width="360px"
+              height="640px"
+            />
+            <a>
+              <div
+                class="mask waves-effect waves-light"
+                mdbRippleRadius
+              ></div>
+            </a>
+        </a>
+        <!--/.Card image-->
+
+        <!--/.Card content-->
+
+      <!--/.Card-->
+    </div>
+  <!--/First column-->
+  </div>
+</div>
+<app-add-catalog></app-add-catalog>

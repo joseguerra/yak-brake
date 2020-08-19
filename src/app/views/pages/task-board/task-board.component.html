@@ -1,0 +1,180 @@
+<div class="center">
+  <img *ngIf="load" src="./assets/img/loader.svg" width="64" height="64" />
+</div>
+
+<div *ngIf="!load">
+    <br />
+    <div class="container">
+      <div class="row m-auto">
+        <div class="col-12">
+          <ng-container
+            *ngFor="let container of kanbanContainers"
+            [ngTemplateOutlet]="kanbanContainer"
+            [ngTemplateOutletContext]="{ item: container }"
+          ></ng-container>
+        </div>
+      </div>
+    </div>
+    
+    <ng-template #kanbanContainer let-item="item">
+      <div class="example-container">
+        <div class="d-flex flex-row bd-highlight3" style="width: 300px;">
+          <div class="bd-highlight">
+            <h4>{{ item?.title }}</h4>
+          </div>
+          <div class="bd-highlight ml-auto">
+            <span class="badge badge-secondary">{{ item?.item?.length }}</span>
+          </div>
+        </div>
+        <div
+          cdkDropList
+          [id]="item?.id"
+          [cdkDropListData]="item?.item"
+          [cdkDropListConnectedTo]="item.connectedTo"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div
+            class="card example-box"
+            cdkDrag
+            data-toggle="modal"
+            data-target="#exampleModalLong"
+            (click)="onSelect(item)"
+            *ngFor="let item of item?.item"
+          >
+            <ng-container
+              [ngTemplateOutlet]="cardContainer"
+              [ngTemplateOutletContext]="{ item: item }"
+            ></ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    
+    <!-- Card Container -->
+    
+    <ng-template #cardContainer let-item="item">
+      <div class="card-body">
+
+          <div class="content2">
+              <label>
+                  {{ item.firstName }} {{item.lastName }} 
+              </label>
+              <span class="rigth"><strong>${{ item.total | number }}</strong></span>
+          </div>
+
+        <!-- <p class="card-text">{{cards.description}}.</p> -->
+        <p style="font-size: 12px;">
+            <strong>Direccion:</strong>
+          <span style="color: gray;"> {{ item.address }} - {{item.state}}/{{item.country}}</span>
+        </p>
+        <p style="font-size: 12px;">
+            <strong>Email:</strong>
+            <span style="color: gray;"> {{ item.email }}</span>
+          </p>
+          <p style="font-size: 12px;">
+              <strong>Creado:</strong>
+              <span style="color: gray;"> {{ item.date | momentTimeAgo }}</span>
+            </p>
+        <span style="color: gray;" *ngFor="let assignie of item.assignies"
+          ><img
+            src="https://www.shareicon.net/data/512x512/2017/07/13/888372_man_512x512.png"
+            [alt]="assignie.userId"
+            width="20px"
+            height="20px"
+        /></span>
+      </div>
+    </ng-template>
+  </div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModalLong"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLongTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Orden</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          class="needs-validation"
+          #addProductForm="ngForm"
+          
+        >
+          <div class="row">
+              <tr class="list-group-item d-flex justify-content-between float">
+                  <td>
+                      <span class="sizeTotal">Total ({{ cartQuantity }} productos): <strong>${{ totalValue * productService.getValueCurrency() | number }}</strong></span>
+                  </td>
+                  
+                </tr>
+              <tbody class="a">
+                  <tr
+                    class="list-group-item d-flex justify-content-between lh-condensed height"
+                    *ngFor="let product of order.products; let idx = index"
+                  >
+                    <td>
+                          <img
+                            [src]="product.productImageUrl"
+                            class="img-fluid"
+                            alt=""
+                            width="260px"
+                            height="640px"
+                          />
+                          <a>
+                      
+                            <div
+                              class="mask waves-effect waves-light"
+                              mdbRippleRadius
+                            ></div>
+                          </a>
+                    </td>
+                    <td class="padding-left">
+                        <div class="name">
+                          {{ product.productName}}
+                        </div>
+                        <br/>
+                        <div class="content">
+                            <label>
+                                Cantidad: 
+                            </label>
+                            <div>
+                            
+
+                              {{ product.cartQuantity }}<span class="caret"></span>
+                            </div>
+                            <span class="rigth"><strong>$ {{ product.productPrice * productService.getValueCurrency() | number }}</strong></span>
+                        </div>
+                
+                
+                
+                          
+                      
+                    </td>
+                  </tr>
+              </tbody>
+
+
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

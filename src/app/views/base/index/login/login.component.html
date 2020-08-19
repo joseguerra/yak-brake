@@ -1,0 +1,155 @@
+<br />
+<section class="container">
+  <!-- Login form -->
+  <div class="col-sm-6">
+    <form
+    class="size"
+      #loginForm="ngForm"
+      (ngSubmit)="signInWithEmail(loginForm)"
+    >
+      <p class="h5 text-center mb-4">Login</p>
+
+      <div class="form-group">
+        <label for="loginEmailId">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="loginEmailId"
+          aria-describedby="emailHelp"
+          name="emailId"
+          [(ngModel)]="user.emailId"
+          mdbInputValidate
+          [email]="true"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="loginPassword"
+          name="loginPassword"
+          [(ngModel)]="user.loginPassword"
+          autocomplete="current-password"
+          placeholder="Contraseña"
+        />
+      </div>
+
+      <div class="text-center">
+        <button
+          type="submit"
+          class="btn btn-primary waves-light mx-2"
+          id="loginButton"
+          mdbRippleRadius
+        >
+          Login
+        </button>
+
+        <button
+          type="button"
+          class="btn waves-light mx-2 text-white"
+          (click)="signInWithGoogle()"
+          style="background-color: #dd4b39;"
+        >
+          <i class="fa fa-google" aria-hidden="true"></i>
+          Registrate con Google
+        </button>
+      </div>
+    </form>
+  </div>
+  <br />
+  <p>
+    Nuevo Usuario ?
+    <a
+      data-toggle="modal"
+      data-target="#createUserForm"
+      style="color: dodgerblue;"
+      >Registrate!</a
+    >
+  </p>
+  <!-- Login form -->
+<div class="center">
+  <img *ngIf="load" src="./assets/img/loader.svg" width="64" height="64" />
+
+</div>
+  
+  <!--Modal: Register Form-->
+  <div
+    class="modal fade"
+    id="createUserForm"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog cascading-modal" role="document">
+      <form #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+        <div class="modal-content">
+          <div class="modal-header light-blue darken-3 white-text">
+            <h4 class="title"><i class="fa fa-user-plus"></i> Registrate</h4>
+            <button
+              type="button"
+              class="close waves-effect waves-light"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div
+              class="alert alert-danger"
+              role="alert"
+              *ngIf="errorInUserCreate"
+            >
+              {{ translate.data[errorMessage.message]  | translate }}
+            
+            </div>
+            <div class="form-group form-sm">
+              <label for="emailId">Su email</label>
+              <input
+                mdbActive
+                type="email"
+                id="emailId"
+                class="form-control"
+                name="emailId"
+                [(ngModel)]="createUser.emailId"
+                placeholder="Email"
+                mdbInputValidate
+                [email]="true"
+                autocomplete="email"
+              />
+            </div>
+            <div class="form-group form-sm">
+              <label for="password">Contraseña</label>
+              <input
+                mdbActive
+                type="password"
+                id="password"
+                class="form-control"
+                name="password"
+                [(ngModel)]="createUser.password"
+                placeholder="Contraseña"
+                mdbInputValidate
+                autocomplete="new-password"
+              />
+            </div>
+            <div class="text-center mt-2">
+              <button
+                class="btn btn-info waves-light"
+                id="signUpButton"
+                mdbRippleRadius
+              >
+                Registrar
+                <i class="fa fa-sign-in ml-1"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<br />
+<br />
+<br />

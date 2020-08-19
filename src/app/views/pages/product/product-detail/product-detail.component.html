@@ -1,0 +1,108 @@
+<br />
+<div class="center">
+    <img *ngIf="loading" src="./assets/img/loader.svg" width="64" height="64" />
+  
+  </div>
+<div class="container suelo" *ngIf="!loading">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="product-image">
+        <div >
+
+          <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+        </div>
+
+        <div class="" style="margin-top: 15px;">
+          <ul class="list-group mb-3">
+            <li
+              class="list-group-item d-flex justify-content-between lh-condensed"
+            >
+              <div>
+                <h6 class="my-0">Precio</h6>
+              </div>
+              <span class="text-muted" style="color: crimson !important;"
+                >$ {{ product.productPrice * productService.getValueCurrency() | number }}</span
+              >
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between lh-condensed"
+            >
+              <div>
+                <h6 class="my-0">Vendedor</h6>
+              </div>
+              <span class="text-muted" style="color: crimson !important;">{{
+                product.productSeller
+              }}</span>
+            </li>
+          </ul>
+
+          <div *ngIf="!loading" class="content">
+              <label>
+                  Cantidad: 
+              </label>
+              <div dropdown>
+              
+                  <a
+                  dropdownToggle
+                  type="button"
+                  class="nav-link dropdown-toggle waves-light"
+                >
+                {{ product.cartQuantity }}<span class="caret"></span
+                ></a>
+                <div
+                  *dropdownMenu
+                  class="dropdown-menu dropdown dropdown-primary"
+                  role="menu"
+                >
+                  <a
+                    class="dropdown-item waves-light"
+                    href="javascript:;;"
+                    (click)="setLang(val)"
+                    *ngFor="let val of valueList"
+                  >
+                    {{ val }}</a
+                  >
+                </div>
+              </div>
+          </div>
+
+          <button *ngIf="!loading && product.productQuantity" class="btn btn-primary" (click)="addToCart(product)">
+            Agregar al Carrito
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-8">
+      <div class="product-detail">
+        <h5 class="product-head">Detalles del Producto</h5>
+        <table class="table" cellspacing="0" style="max-height: 28px;">
+          <tbody>
+            <tr>
+              <th scope="row">Nombre</th>
+              <td>{{ product.productName }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Descripcion</th>
+              <td [innerHTML]="product.productDescription"></td>
+            </tr>
+            <tr>
+              <th scope="row">Categoria</th>
+              <td>{{ product.productCategory }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Unidades en Stock.</th>
+              <td *ngIf="product.productQuantity>10">{{ product.productQuantity }}</td>
+              <td style="color:red" *ngIf="product.productQuantity <= 10"> Solo queda(n) {{ product.productQuantity }} en stock (hay más unidades en camino).</td>
+
+              
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <app-best-product></app-best-product>
+</div>

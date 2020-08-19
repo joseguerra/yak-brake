@@ -1,0 +1,480 @@
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light ">
+  <!-- Collapsible content -->
+    <!-- Collapse button -->
+    
+    <div class="nav-container">
+      <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#basicExampleNav"
+      aria-controls="basicExampleNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon">
+      </span>
+    </button>
+  
+      <div class="hide">
+            <span>
+              <img
+        [routerLink]="['/']"
+        height="52px"
+        src="./assets/banner_img/logo.png"
+      />
+              </span
+            >
+       
+      </div>
+        <div class="hide end">
+            <i class="fa fa-shopping-cart top" [routerLink]="['/products/cart-items']">
+              <span class="mt-2 class-name">
+                {{ productService.getLocalCartProductsQuantity() }}</span
+              >
+            </i>
+        </div>
+    </div>
+
+
+  
+
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto hide2">
+        <li class="nav-item">
+            <img
+            class="nav-link" [routerLink]="['/']"
+            height="88px"
+            src="./assets/banner_img/logo.png"
+          />
+          </li>
+    </ul>
+    <ul class="navbar-nav mr-auto hide2">
+
+        <div class="flex-column ml-lg-0 ml-3">
+
+          <ul class="navbar-nav margin-top">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text cursor" (click)="onSearch()" id="basic-addon1"><i class="fa fa-search mr-1"></i></span>
+                      </div>
+                      <input type="text" class="form-control" [(ngModel)]="search" aria-label="Username" aria-describedby="basic-addon1">
+           
+          </ul>
+          <ul class="navbar-nav flex-row mb-2">
+              <li class="nav-item hide">
+                  <a data-target="#basicExampleNav" routerLinkActive="class-name" [routerLinkActiveOptions]="{exact: true}"   data-toggle="collapse" class="nav-link" [routerLink]="['/']"
+                    >INICIO
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item hide2">
+                  <a data-target="#basicExampleNav" class="nav-link" routerLinkActive="class-name" [routerLinkActiveOptions]="{exact: true}"   [routerLink]="['/']"
+                    >INICIO
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item hide" >
+                  <a data-target="#basicExampleNav" data-toggle="collapse"
+                    class="nav-link hidden-xs"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/all-products']"
+                    >PRODUCTOS</a
+                  >
+                </li>
+                <li class="nav-item hide2" >
+                  <a data-target="#basicExampleNav"
+                    class="nav-link hidden-xs"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/all-products']"
+                    >PRODUCTOS</a
+                  >
+                </li>
+                <li class="nav-item hide">
+                  <a data-target="#basicExampleNav"
+                    data-toggle="collapse"
+                    class="nav-link"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/catalog']"
+                    >CATÁLOGO</a
+                  >
+                </li>
+                <li class="nav-item hide2">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/catalog']"
+                    >CATÁLOGO</a
+                  >
+                </li>
+                <li class="nav-item hide">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    data-toggle="collapse"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/contact']"
+                    >CONTÁCTANOS</a
+                  >
+                </li>
+                <li class="nav-item hide2">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/contact']"
+                    >CONTÁCTANOS</a
+                  >
+                </li>
+                <li class="nav-item hide">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    data-toggle="collapse"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/our']"
+                    >NOSOTROS</a
+                  >
+                </li>
+                <li class="nav-item hide2">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/our']"
+                    >NOSOTROS</a
+                  >
+                </li>
+                <li class="nav-item" *ngIf="authService.isAdmin$ | async">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/task-board/tasks']"
+                    >VENTAS</a
+                  >
+                </li>
+
+          </ul>
+      </div>
+
+
+
+
+
+
+
+      
+      
+      <!--
+        <li class="nav-item">
+        <a
+          class="nav-link"
+          href="jaascript:;;"
+          [routerLink]="['/task-board/tasks']"
+          >{{ this.translate.data["TASKBOARD"] | translate }}</a
+        >
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li> -->
+    </ul>
+
+    <ul class="navbar-nav mr-auto hide">
+
+       
+
+
+        <li class="nav-item">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search mr-1"></i></span>
+                <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+              </div>
+              
+           
+        </li>
+
+              <li class="nav-item hide">
+                  <a data-target="#basicExampleNav" routerLinkActive="class-name" [routerLinkActiveOptions]="{exact: true}"   data-toggle="collapse" class="nav-link" [routerLink]="['/']"
+                    >INICIO
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item hide2">
+                  <a data-target="#basicExampleNav" class="nav-link" routerLinkActive="class-name" [routerLinkActiveOptions]="{exact: true}"   [routerLink]="['/']"
+                    >INICIO
+                    <span class="sr-only">(current)</span>
+                  </a>
+                </li>
+                <li class="nav-item hide" >
+                  <a data-target="#basicExampleNav" data-toggle="collapse"
+                    class="nav-link hidden-xs"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/all-products']"
+                    >PRODUCTOS</a
+                  >
+                </li>
+                <li class="nav-item hide2" >
+                  <a data-target="#basicExampleNav"
+                    class="nav-link hidden-xs"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/all-products']"
+                    >PRODUCTOS</a
+                  >
+                </li>
+                <li class="nav-item hide">
+                  <a data-target="#basicExampleNav"
+                    data-toggle="collapse"
+                    class="nav-link"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/catalog']"
+                    >CATÁLOGO</a
+                  >
+                </li>
+                <li class="nav-item hide2">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/catalog']"
+                    >CATÁLOGO</a
+                  >
+                </li>
+                <li class="nav-item hide">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    data-toggle="collapse"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/contact']"
+                    >CONTÁCTANOS</a
+                  >
+                </li>
+                <li class="nav-item hide2">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/contact']"
+                    >CONTÁCTANOS</a
+                  >
+                </li>
+                <li class="nav-item hide">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    data-toggle="collapse"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/our']"
+                    >NOSOTROS</a
+                  >
+                </li>
+                <li class="nav-item hide2">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/products/our']"
+                    >NOSOTROS</a
+                  >
+                </li>
+                <li class="nav-item" *ngIf="authService.isAdmin$ | async">
+                  <a data-target="#basicExampleNav"
+                    class="nav-link"
+                    routerLinkActive="class-name" 
+                    [routerLink]="['/task-board/tasks']"
+                    >VENTAS</a
+                  >
+                </li>
+              
+      
+      <!--
+        <li class="nav-item">
+        <a
+          class="nav-link"
+          href="jaascript:;;"
+          [routerLink]="['/task-board/tasks']"
+          >{{ this.translate.data["TASKBOARD"] | translate }}</a
+        >
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li> -->
+    </ul>
+
+    <!-- Links -->
+
+    <ul class="navbar-nav ml-auto margin-top2">
+      <li class="nav-item hide">
+        <div>
+          <a data-target="#basicExampleNav" data-toggle="collapse"
+            class="nav-link"
+            routerLinkActive="class-name" 
+            [routerLink]="['/products/favourite-products']"
+          >
+            <i class="fa fa-heart">
+              <span class="mt-2">
+                {{ productService.getLocalFavouriteProducts().length }}</span
+              >
+            </i>
+          </a>
+        </div>
+      </li>
+      <li class="nav-item hide2">
+        <div>
+          <a data-target="#basicExampleNav"
+            class="nav-link"
+            routerLinkActive="class-name" 
+            [routerLink]="['/products/favourite-products']"
+          >
+            <i class="fa fa-heart">
+              <span class="mt-2">
+                {{ productService.getLocalFavouriteProducts().length }}</span
+              >
+            </i>
+          </a>
+        </div>
+      </li>
+      <li class="nav-item hide2">
+        <div>
+          <a data-target="#basicExampleNav"
+            class="nav-link"
+            routerLinkActive="class-name" 
+            [routerLink]="['/products/cart-items']"
+          >
+            <i class="fa fa-shopping-cart">
+              <span class="mt-2">
+                {{ productService.getLocalCartProductsQuantity() }}</span
+              >
+            </i>
+          </a>
+        </div>
+      </li>
+      <li class="nav-item hide" *ngIf="authService.isLoggedIn$ | async">
+        <a data-target="#basicExampleNav" data-toggle="collapse" class="nav-link"
+        routerLinkActive="class-name" 
+        [routerLink]="['/users']">
+          <i class="fa fa-user mr-1"></i
+          >{{ this.translate.data["MYACCOUNT"] | translate }}</a
+        >
+      </li>
+      <li class="nav-item hide2" *ngIf="authService.isLoggedIn$ | async">
+        <a data-target="#basicExampleNav" class="nav-link"
+        routerLinkActive="class-name" 
+        [routerLink]="['/users']">
+          <i class="fa fa-user mr-1"></i
+          >{{ this.translate.data["MYACCOUNT"] | translate }}</a
+        >
+      </li>
+
+
+      <li class="nav-item dropdown hide" dropdown>
+        <a data-target="#basicExampleNav"
+          dropdownToggle
+          type="button"
+          class="nav-link dropdown-toggle waves-light"
+        >
+          <i class="fa fa-usd"> </i><span class="caret"></span
+        ></a>
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown dropdown-primary"
+          role="menu"
+        >
+          <a data-target="#basicExampleNav" data-toggle="collapse"
+            class="dropdown-item waves-light"
+            href="javascript:;;"
+            (click)="setLang(lang.language)"
+            *ngFor="let lang of languageList"
+          >
+            <i class="fa fa-flag-o mr-2"></i>
+            {{ lang.language }}</a
+          >
+        </div>
+      </li>
+      <li class="nav-item dropdown hide2" dropdown>
+        <a data-target="#basicExampleNav"
+          dropdownToggle
+          type="button"
+          class="nav-link dropdown-toggle waves-light"
+        >
+          <i class="fa fa-usd"> </i>
+          <img *ngIf="productService.getValueCurrency() !== 1"
+          class="padding"
+          src="../../../../../assets/banner_img/197575.svg"
+          width="20px"
+          height="20px"
+          />
+          <img *ngIf="productService.getValueCurrency() === 1"
+          class="padding"
+          src="../../../../../assets/banner_img/197580.svg"
+          width="20px"
+          height="20px"
+          />
+          <span class="caret"></span
+        ></a>
+        <div
+          *dropdownMenu
+          class="dropdown-menu dropdown dropdown-primary"
+          role="menu"
+        >
+          <a data-target="#basicExampleNav"
+            class="dropdown-item waves-light"
+            href="javascript:;;"
+            (click)="setLang(lang.language)"
+            *ngFor="let lang of languageList"
+          >
+            
+            <img
+              [src]="lang.image"
+              alt=""
+              width="30px"
+              height="30px"
+            />
+            {{ lang.language }}</a
+          >
+        </div>
+      </li>
+      <li class="nav-item hide" *ngIf="authService.isLoggedOut$ | async">
+        <a data-target="#basicExampleNav" data-toggle="collapse" routerLinkActive="class-name"  class="nav-link" [routerLink]="['/login']">
+          <i class="fa fa-sign-in mr-1"></i>
+          {{ this.translate.data["SIGNIN"] | translate }}</a
+        >
+      </li>
+      <li class="nav-item hide2" *ngIf="authService.isLoggedOut$ | async">
+        <a data-target="#basicExampleNav" class="nav-link" routerLinkActive="class-name"  [routerLink]="['/login']">
+          <i class="fa fa-sign-in mr-1"></i>
+          {{ this.translate.data["SIGNIN"] | translate }}</a
+        >
+      </li>
+      <li class="nav-item hide" *ngIf="authService.isLoggedIn$ | async">
+        <a data-target="#basicExampleNav" data-toggle="collapse" class="nav-link" (click)="logout()">
+          <i class="fa fa-sign-in mr-1"></i
+          >{{ this.translate.data["LOGOUT"] | translate }}</a
+        >
+      </li>
+      <li class="nav-item hide2" *ngIf="authService.isLoggedIn$ | async">
+        <a data-target="#basicExampleNav" class="nav-link" (click)="logout()">
+          <i class="fa fa-sign-in mr-1"></i
+          >{{ this.translate.data["LOGOUT"] | translate }}</a
+        >
+      </li>
+    </ul>
+
+
+  </div>
+
+
+
+  <!-- Collapsible content -->
+</nav>
+<!--/.Navbar-->
+
+<!-- Theme Template -->
+<ng-template #themeTemplate let-item="item">
+  <div
+    class="col-sm hover-effect"
+    data-toggle="tooltip"
+    data-placement="bottom"
+    [title]="item.title"
+    style="padding: 0;"
+  >
+    <div class="color-container">
+      <div
+        class="colorDiv {{ item.color }}"
+        (click)="updateTheme(item.id)"
+      ></div>
+    </div>
+  </div>
+</ng-template>

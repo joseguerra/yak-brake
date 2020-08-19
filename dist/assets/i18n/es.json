@@ -1,0 +1,15 @@
+{
+  "TITLE": "YAK BRAKE",
+  "HOME": "Inicio",
+  "PRODUCTS": "Productos",
+  "TASKBOARD": "Tablero",
+  "CONTACT": "Contactos",
+  "SIGNIN": "Identificate/Salir",
+  "MYACCOUNT": "Mi Cuenta",
+  "LOGOUT": "Salir",
+  "BESTPRODUCTS": "Mejores Productos",
+  "VIEWALL": "Ver Mas",
+  "createUserWithEmailAndPassword failed: First argument \"email\" must be a valid string.": "Email debe ser valido",
+  "createUserWithEmailAndPassword failed: Second argument \"password\" must be a valid string.": "Contraseña debe ser valida",
+  "The email address is already in use by another account.": "Email ya registrado, intente con otro email"
+}

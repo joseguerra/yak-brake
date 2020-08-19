@@ -1,0 +1,255 @@
+<div class="center">
+  <img *ngIf="load" src="./assets/img/loader.svg" width="64" height="64" />
+</div>
+
+<form
+  class="needs-validation container suelo"
+  [formGroup]="registerForm"
+  (ngSubmit)="createOrder(registerForm)"
+>
+  <div class="mt-3 a">
+      <div class="col-md order-md-1">
+        <h4 class="mb-3">Direccion</h4>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="firstName">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                formControlName="firstName"
+                name="firstName"
+                required
+              />
+              <div *ngIf="registerForm.controls.firstName.invalid" [ngClass] = "'error'"> 
+                  Nombre es requerido.
+                </div>
+             
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="lastName">Apellido</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                formControlName="lastName"
+                name="lastName"
+                required
+              />
+              <div *ngIf="registerForm.controls.lastName.invalid" [ngClass] = "'error'"> 
+                  Apellido es requerido.
+                </div>
+            </div>
+          </div>
+
+          <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="email">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  formControlName="email"
+                  name="email"
+                  required
+                />
+                <div *ngIf="registerForm.controls.email.invalid" [ngClass] = "'error'"> 
+                    Email es requerido.
+                  </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="phone">Telefono</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone"
+                  formControlName="phone"
+                  name="phone"
+                  required
+                />
+                <div *ngIf="registerForm.controls.phone.invalid" [ngClass] = "'error'"> 
+                    Telefono es requerido.
+                  </div>
+              </div>
+            </div>
+    
+          <div class="mb-3">
+            <label for="address">Direccion</label>
+            <input
+              type="text"
+              class="form-control"
+              id="address"
+              placeholder=""
+              formControlName="address"
+              name="address1"
+              required
+            />
+            <div *ngIf="registerForm.controls.address.invalid" [ngClass] = "'error'"> 
+                Direccion es requerida.
+              </div>
+          </div>
+    
+          <div class="mb-3">
+            <label for="address2"
+              >Direccion 2
+              <span class="text-muted">(Opcional)</span>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder=""
+              formControlName="address2"
+            />
+          </div>
+    
+          <div class="row">
+            <div class="col-md-5 mb-3">
+              <label for="country">Pais</label>
+              <select
+                class="custom-select d-block w-100"
+                id="country"
+                required
+                formControlName="country"
+                name="country"
+              >
+                <option value="">Escoge...</option>
+                <option>Colombia</option>
+                <option>Venezuela</option>
+              </select>
+              <div *ngIf="registerForm.controls.country.invalid" [ngClass] = "'error'"> 
+                  Pais es requerido.
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="state">Estado</label>
+              <input
+                type="text"
+                class="form-control"
+                id="state"
+                placeholder=""
+                formControlName="state"
+                name="state"
+                required
+              />
+              <div *ngIf="registerForm.controls.state.invalid" [ngClass] = "'error'"> 
+                  Estado es requerido.
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label for="zip">ZIP <span class="text-muted">(Opcional)</span></label>
+              <input
+                type="text"
+                class="form-control"
+                id="zip"
+                placeholder=""
+                formControlName="zip"
+                name="zip"
+              />
+            </div>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="row b">
+    <div
+      class="well col-xs-10 col-sm-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-3"
+      style="margin: auto;"
+    >
+
+    <div class="fixed">
+      <div style="position: sticky" [ngStyle]="{'opacity':registerForm.invalid?  '0.33': '', 'pointer-events':registerForm.invalid?  'none': '', 'display':productService.getValueCurrency() !== 1?  'none': ''}" #paypal></div>
+
+      <form id="frm_ePaycoCheckoutOpen" 
+      [ngStyle]="{'opacity':registerForm.invalid?  '0.33': '', 'pointer-events':registerForm.invalid?  'none': '', 'display':productService.getValueCurrency() === 1?  'none': ''}"
+          (click)="payEpayco(registerForm)"
+          src='https://checkout.epayco.co/checkout.js'>
+        
+          <input name="p_cust_id_cliente" type="hidden" value="35284"/>
+          <input name="p_key" type="hidden" value="565016fc48d8f4a6b6548ef6d9d7cc99c70ef3c9"/>
+          <input name="p_id_factura" type="hidden" value=""/>
+          <input name="p_description" type="hidden" value="frenos"/>
+          <input name="p_test_request" type="hidden" value="false"/>
+          <input name="p_url_respuesta" type="hidden" value=""/>
+          <input name="p_url_confirmacion" type="hidden" value=""/>
+          <input type="image" id="imagen" src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/btn4.png" alt=""/>
+          <input type="hidden" id="idboton" name="idboton" value="27233"/>
+      </form> <!-- ================================================================== -->
+  
+  
+      <a [ngStyle]="{'opacity':registerForm.invalid?  '0.33': '', 'pointer-events':registerForm.invalid?  'none': ''}" *ngIf="productService.getValueCurrency() === 1" class="qlwapp-toggle" data-action="open" data-phone="+573157005569"
+        data-message="Buen día, podrías darme información sobre tus productos 
+        ?" href="https://wa.me/+584247117137?text=Buen%20día,%20podrías%20darme%20información%20sobre%20tus%20productos%20?" target="_blank">
+        <i class="fa fa-whatsapp"></i>
+        <span class="padding-left">
+          Finalice su pago desde whatsapp.
+        </span> 
+        </a>
+        <a [ngStyle]="{'opacity':registerForm.invalid?  '0.33': '', 'pointer-events':registerForm.invalid?  'none': ''}" *ngIf="productService.getValueCurrency() !== 1" class="qlwapp-toggle" data-action="open" data-phone="+573157005569"
+        data-message="Buen día, podrías darme información sobre tus productos 
+        ?" href="https://wa.me/+573157005569?text=Buen%20día,%20podrías%20darme%20información%20sobre%20tus%20productos%20?" target="_blank">
+        <i class="fa fa-whatsapp"></i>
+        <span class="padding-left">
+          Finalice su pago desde whatsapp.
+        </span> 
+        </a>
+    </div>
+
+
+    <br/>
+      <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6">
+          <p>
+            Fecha: {{ date | date }}
+          </p>
+          <p>
+            Factura #: 34522677W
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center padding">
+          <h1>Factura</h1>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <td></td>
+              <th class="text-center">Precio</th>
+              <th class="text-center">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products">
+              <td class="col-md-9">
+                <h6>
+                  {{ product.productName }}
+                </h6>
+              </td>
+              <td></td>
+              <td class="col-md-1 text-center">$ {{ product.productPrice * productService.getValueCurrency() | number }}</td>
+              <td class="col-md-1 text-center">$ {{ product.productPrice * productService.getValueCurrency() | number }}</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td class="text-right">
+                <p><strong>Total: </strong></p>
+              </td>
+              <td class="text-center text-danger">
+                <h4>
+                  <strong>$ {{ (totalPrice * productService.getValueCurrency()) | number }}</strong>
+                </h4>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+  </div>
+</form>
+
+
+

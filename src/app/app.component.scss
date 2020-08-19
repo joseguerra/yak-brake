@@ -1,0 +1,35 @@
+:host {
+  main {
+    position: relative;
+  }
+  .qlwapp-toggle{
+    border-radius: 50px;
+    margin-left: 20px;
+    height: 40px;
+      white-space: nowrap;
+      padding: 12px 24px;
+      background-color: #62ad56;
+      color: #fff;
+      outline: 0;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0,0,0,0.06), 0 2px 32px 0 rgba(0,0,0,0.16);
+    margin-top: 24px;
+    margin-bottom: 24px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+    display: scroll;
+    position: fixed;
+    bottom: 27px;
+    right: auto;
+  }
+}
+
+.padding-left{
+  padding-left: 4px
+}
